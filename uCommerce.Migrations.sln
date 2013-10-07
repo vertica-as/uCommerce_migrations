@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{7953B951-28D7-4376-BB33-01BA2DB0C478}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner_FluentMigrator", "src\Runner_FluentMigrator\Runner_FluentMigrator.csproj", "{DDDA7A38-FEBD-44F7-B0EB-62008B81F2A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{7953B951-28D7-4376-BB33-01BA2DB0C478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7953B951-28D7-4376-BB33-01BA2DB0C478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7953B951-28D7-4376-BB33-01BA2DB0C478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDA7A38-FEBD-44F7-B0EB-62008B81F2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDA7A38-FEBD-44F7-B0EB-62008B81F2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDA7A38-FEBD-44F7-B0EB-62008B81F2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDA7A38-FEBD-44F7-B0EB-62008B81F2A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
