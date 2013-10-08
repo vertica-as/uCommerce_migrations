@@ -8,39 +8,43 @@ namespace uCommerce.Migrations.Core
 {
 	public class Migrator
 	{
-		 private readonly SessionProvider _sessionProvider;
+		private readonly ISessionProvider _sessionProvider;
 
 		public Migrator(string connectionString)
 		{
 			_sessionProvider = new SessionProvider(new CustomCommerceConfigurationProvider(connectionString), new DummyUserService());
 
-			_sessionProvider = new SessionProvider(new CustomCommerceConfigurationProvider(connectionString), new DummyUserService());
-			_dataTypes = new Lazy<Repository<DataType>>(() => new Repository<DataType>(_sessionProvider));
-			_definitions = new Lazy<Repository<Definition>>(() => new Repository<Definition>(_sessionProvider));
-			_definitionFields = new Lazy<Repository<DefinitionField>>(() => new Repository<DefinitionField>(_sessionProvider));
-			_productDefinitions = new Lazy<Repository<ProductDefinition>>(() => new Repository<ProductDefinition>(_sessionProvider));
-			_productDefinitionFields = new Lazy<Repository<ProductDefinitionField>>(() => new Repository<ProductDefinitionField>(_sessionProvider));
-			_currencies = new Lazy<Repository<Currency>>(() => new Repository<Currency>(_sessionProvider));
-			_priceGroups = new Lazy<Repository<PriceGroup>>(() => new Repository<PriceGroup>(_sessionProvider));
-			_productRelationTypes = new Lazy<Repository<ProductRelationType>>(() => new Repository<ProductRelationType>(_sessionProvider));
+			_dataTypes = repository<DataType>(_sessionProvider);
+			_definitions = repository<Definition>(_sessionProvider);
+			_definitionFields = repository<DefinitionField>(_sessionProvider);
+			_productDefinitions = repository<ProductDefinition>(_sessionProvider);
+			_productDefinitionFields = repository<ProductDefinitionField>(_sessionProvider);
+			_currencies = repository<Currency>(_sessionProvider);
+			_priceGroups = repository<PriceGroup>(_sessionProvider);
+			_productRelationTypes = repository<ProductRelationType>(_sessionProvider);
 
-			_catalogGroups = new Lazy<Repository<ProductCatalogGroup>>(() => new Repository<ProductCatalogGroup>(_sessionProvider));
-			_emailProfiles = new Lazy<Repository<EmailProfile>>(() => new Repository<EmailProfile>(_sessionProvider));
-			_orderNumbers = new Lazy<Repository<OrderNumberSerie>>(() => new Repository<OrderNumberSerie>(_sessionProvider));
-			_catalogs = new Lazy<Repository<ProductCatalog>>(() => new Repository<ProductCatalog>(_sessionProvider));
+			_catalogGroups = repository<ProductCatalogGroup>(_sessionProvider);
+			_emailProfiles = repository<EmailProfile>(_sessionProvider);
+			_orderNumbers = repository<OrderNumberSerie>(_sessionProvider);
+			_catalogs = repository<ProductCatalog>(_sessionProvider);
 
-			_categories = new Lazy<Repository<Category>>(() => new Repository<Category>(_sessionProvider));
-			_shippingMethods = new Lazy<Repository<ShippingMethod>>(() => new Repository<ShippingMethod>(_sessionProvider));
-			_shippingMethodPrices = new Lazy<Repository<ShippingMethodPrice>>(() => new Repository<ShippingMethodPrice>(_sessionProvider));
+			_categories = repository<Category>(_sessionProvider);
+			_shippingMethods = repository<ShippingMethod>(_sessionProvider);
+			_shippingMethodPrices = repository<ShippingMethodPrice>(_sessionProvider);
 
-			_countries = new Lazy<Repository<Country>>(() => new Repository<Country>(_sessionProvider));
-			_paymentRepository = new Lazy<Repository<PaymentMethod>>(() => new Repository<PaymentMethod>(_sessionProvider));
-			_orderNumberSeries = new Lazy<Repository<OrderNumberSerie>>(() => new Repository<OrderNumberSerie>(_sessionProvider));
+			_countries = repository<Country>(_sessionProvider);
+			_paymentRepository = repository<PaymentMethod>(_sessionProvider);
+			_orderNumberSeries = repository<OrderNumberSerie>(_sessionProvider);
 
-			_campaigns = new Lazy<IRepository<Campaign>>(() => new Repository<Campaign>(_sessionProvider));
-			_campaignItems = new Lazy<IRepository<CampaignItem>>(() => new Repository<CampaignItem>(_sessionProvider));
+			_campaigns = repository<Campaign>(_sessionProvider);
+			_campaignItems = repository<CampaignItem>(_sessionProvider);
 
-			_status = new Lazy<Repository<OrderStatus>>(() => new Repository<OrderStatus>(_sessionProvider));
+			_status = repository<OrderStatus>(_sessionProvider);
+		}
+
+		private static Lazy<Repository<TEntity>> repository<TEntity>(ISessionProvider provider) where TEntity : class
+		{
+			return new Lazy<Repository<TEntity>>(() => new Repository<TEntity>(provider));
 		}
 
 		#region DataTypes
@@ -718,7 +722,7 @@ namespace uCommerce.Migrations.Core
 			_definitions.Value.Delete(campaignDefinition);
 		}
 
-		private readonly Lazy<IRepository<Campaign>> _campaigns;
+		private readonly Lazy<Repository<Campaign>> _campaigns;
 
 		public Campaign Campaign(string name, string catalogGroup, DateTime campaignStart, DateTime campaignEnds)
 		{
@@ -752,7 +756,7 @@ namespace uCommerce.Migrations.Core
 			_campaigns.Value.Delete(campaignToBeDeleted);
 		}
 
-		private readonly Lazy<IRepository<CampaignItem>> _campaignItems;
+		private readonly Lazy<Repository<CampaignItem>> _campaignItems;
 
 		public Campaign AddCampaignItems(Campaign campaign, Definition campaignItemDefinition, params string[] names)
 		{
@@ -763,7 +767,7 @@ namespace uCommerce.Migrations.Core
 
 			foreach (var name in names)
 			{
-				CampaignItem campaignItem = _campaignItems.Value.SingleOrDefault(x => x.Name == name && x.Campaign == campaign) ??new CampaignItem
+				CampaignItem campaignItem = _campaignItems.Value.SingleOrDefault(x => x.Name == name && x.Campaign == campaign) ?? new CampaignItem
 				{
 					AllowNextCampaignItems = true, // Allow additional discounts
 					Campaign = campaign,
