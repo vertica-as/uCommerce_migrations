@@ -25,7 +25,7 @@ task Deploy {
 	Get-ChildItem -Path "$core" -Filter "*.cs" |
 		Copy-Item -Destination $release_folder
 
-	Get-ChildItem -Path "$core" -Filter "*.config" |
+	Get-ChildItem -Path "$core" -Filter "*.config.pp" |
 		Copy-Item -Destination $release_folder
 
 	Get-ChildItem -Path "$fluentMigrator" -Filter "*.cs" |

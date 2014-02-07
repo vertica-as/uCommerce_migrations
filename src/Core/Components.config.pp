@@ -5,6 +5,6 @@
 			type="UCommerce.Umbraco.Security.UmbracoUserService, UCommerce.Umbraco" /-->
 		<component id="UserService"
 			service="UCommerce.Security.IUserService, UCommerce"
-			type="uCommerce.Migrations.Core.DummyUserService, uCommerce.Migrations" />
+			type="uCommerce.Migrations.Core.DummyUserService, $AssemblyName$" />
 	</components>
 </configuration>

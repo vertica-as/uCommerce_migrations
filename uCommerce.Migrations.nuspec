@@ -20,7 +20,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="content\**\Components.config" target="content" />
+    <file src="content\**\Components.config.pp" target="content" />
     <file src="content\**\CustomCommerceConfigurationProvider.cs" target="content" />
     <file src="content\**\DummyUserService.cs" target="content" />
     <file src="content\**\Migrator.cs" target="content" />
