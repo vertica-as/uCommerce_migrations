@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>uCommerce_migrations</id>
+		<title>uCommerce Migrations</title>
+		<version>0.9.0.0</version>
+		<authors>Vertica A/S</authors>
+		<licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Core classes to generate uCommerce artifacts from code.</description>
+		<summary>
+			"uCommerce Migrations" allows the generation and deletion of uCommerce artifacts from code. It serves as a foundation for which migrations can be created and run using a runner.
+		</summary>
+		<projectUrl>https://github.com/vertica-as/uCommerce_migrations</projectUrl>
+		<iconUrl></iconUrl>
+		<tags>uCommerce migrations</tags>
+		<dependencies />
+	</metadata>
+	<files>
+		<file src="content\**\Components.config" target="content" />
+		<file src="content\**\CustomCommerceConfigurationProvider.cs" target="content" />
+		<file src="content\**\DummyUserService.cs" target="content" />
+		<file src="content\**\Migrator.cs" target="content" />
+		<file src="content\**\UCommerce.cs" target="content" />
+	</files>
+</package>

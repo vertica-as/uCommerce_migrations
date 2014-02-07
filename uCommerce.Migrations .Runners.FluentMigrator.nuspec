@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>uCommerce_migrations_runners_FluentMigrator</id>
+    <title>uCommerce Migrations for FluentMigrator</title>
+    <version>0.9.0.0</version>
+    <authors>Vertica A/S</authors>
+    <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Use FluentMigrator infrastructure to run uCommerce migrations.</description>
+    <summary>
+      "uCommerce Migrations" allows the generation and deletion of uCommerce artifacts from code. It serves as a foundation for which migrations can be created.
+      "uCommerce Migrations for FluentMigrator" uses FluentMigrator infrastructure to run such migrations.
+    </summary>
+    <projectUrl>https://github.com/vertica-as/uCommerce_migrations</projectUrl>
+    <iconUrl></iconUrl>
+    <tags>uCommerce migrations FluentMigrator</tags>
+    <dependencies>
+      <dependency id="FluentMigrator" version="1.1.1.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="content\**\uCommerceMigration.config" target="content" />
+  </files>
+</package>
