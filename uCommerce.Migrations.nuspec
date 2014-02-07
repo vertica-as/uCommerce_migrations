@@ -12,7 +12,7 @@
 			"uCommerce Migrations" allows the generation and deletion of uCommerce artifacts from code. It serves as a foundation for which migrations can be created and run using a runner.
 		</summary>
 		<projectUrl>https://github.com/vertica-as/uCommerce_migrations</projectUrl>
-		<iconUrl></iconUrl>
+		<iconUrl>https://raw2.github.com/vertica-as/uCommerce_migrations/master/logo.transparent.png</iconUrl>
 		<tags>uCommerce migrations</tags>
 		<dependencies />
 	</metadata>

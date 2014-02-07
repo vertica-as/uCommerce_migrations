@@ -13,13 +13,13 @@
       "uCommerce Migrations for FluentMigrator" uses FluentMigrator infrastructure to run such migrations.
     </summary>
     <projectUrl>https://github.com/vertica-as/uCommerce_migrations</projectUrl>
-    <iconUrl></iconUrl>
+    <iconUrl>https://raw2.github.com/vertica-as/uCommerce_migrations/master/logo.transparent.png</iconUrl>
     <tags>uCommerce migrations FluentMigrator</tags>
     <dependencies>
       <dependency id="FluentMigrator" version="1.1.1.0"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="content\**\uCommerceMigration.config" target="content" />
+    <file src="content\**\uCommerceMigration.cs" target="content" />
   </files>
 </package>

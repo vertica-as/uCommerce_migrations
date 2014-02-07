@@ -5,7 +5,7 @@ properties {
 	$release_path = "$Global:base_dir\release"
 }
 
-task default -depends Clean, Compile, Deploy
+task default -depends Clean, Compile, Deploy, Pack
 
 task Clean {
 	exec { msbuild .\uCommerce.Migrations.sln /t:clean /p:configuration=$configuration /m }
@@ -33,6 +33,15 @@ task Deploy {
 
 	Get-ChildItem $Global:base_dir -Filter '*.nuspec' |
 		Copy-Item -Destination $release_path
+}
+
+task Pack {
+	Ensure-Release-Folder $release_path
+
+	$nuget = "$Global:base_dir\tools\nuget\nuget.exe"
+
+	Get-ChildItem -File -Filter '*.nuspec' -Path $release_path  | 
+		ForEach-Object { exec { & $nuget pack $_.FullName /o $release_path } }
 }
 
 function Ensure-Release-Folder($base)
