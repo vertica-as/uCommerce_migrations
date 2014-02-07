@@ -17,14 +17,34 @@ task Compile {
 }
 
 task Deploy {
-	$release_folders = Ensure-Release-Folders  $release_path
+	$release_folder = Ensure-Release-Folder $release_path
+
+	$core = Src-Folder $Global:base_dir "Core"
+	$fluentMigrator = Src-Folder $Global:base_dir "Runner_FluentMigrator"
+
+	Get-ChildItem -Path "$core" -Filter "*.cs" |
+		Copy-Item -Destination $release_folder
+
+	Get-ChildItem -Path "$core" -Filter "*.config" |
+		Copy-Item -Destination $release_folder
+
+	Get-ChildItem -Path "$fluentMigrator" -Filter "*.cs" |
+		Copy-Item -Destination $release_folder
+
+	Get-ChildItem $Global:base_dir -Filter '*.nuspec' |
+		Copy-Item -Destination $release_path
 }
 
-function Ensure-Release-Folders($base)
+function Ensure-Release-Folder($base)
 {
-	$release_folders = ($base, "$base\content\")
+	$release_folder = "$base\content\"
 
-	foreach ($f in $release_folders) { md $f -Force | Out-Null }
+	md $release_folder -Force | Out-Null
 
-	return $release_folders
+	return $release_folder
+}
+
+function Src-Folder($base, $name)
+{
+	return "$base\src\$name\"
 }
