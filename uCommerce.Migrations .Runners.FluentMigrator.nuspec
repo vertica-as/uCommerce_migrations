@@ -7,7 +7,7 @@
     <authors>Vertica A/S</authors>
     <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Use FluentMigrator infrastructure to run uCommerce migrations.</description>
+    <description>Use FluentMigrator infrastructure to migrate uCommerce artifacts.</description>
     <summary>
       "uCommerce Migrations" allows the generation and deletion of uCommerce artifacts from code. It serves as a foundation for which migrations can be created.
       "uCommerce Migrations for FluentMigrator" uses FluentMigrator infrastructure to run such migrations.
@@ -21,6 +21,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="README.txt" target="README.txt" />
     <file src="content\**\uCommerceMigration.cs" target="content" />
   </files>
 </package>

@@ -33,6 +33,8 @@ task Deploy {
 
 	Get-ChildItem $Global:base_dir -Filter '*.nuspec' |
 		Copy-Item -Destination $release_path
+
+	Copy-Item "$Global:base_dir\README.md" -Destination "$release_path\README.txt"
 }
 
 task Pack {
