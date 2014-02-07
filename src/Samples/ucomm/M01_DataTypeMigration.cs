@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using FluentMigrator;
 using UCommerce.EntitiesV2;
 using uCommerce.Migrations.Runner_FluentMigrator;
@@ -21,4 +21,4 @@ namespace uCommerce.Migrations.Samples.ucomm
 			Migrator.DeleteCategoryDefinition("JustImported");
 		}
 	}
-}
+}*/

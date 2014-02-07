@@ -46,7 +46,7 @@ task Pack {
 
 function Ensure-Release-Folder($base)
 {
-	$release_folder = "$base\content\"
+	$release_folder = "$base\content\Infrastucture"
 
 	md $release_folder -Force | Out-Null
 
