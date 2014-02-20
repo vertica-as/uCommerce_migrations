@@ -12,13 +12,13 @@ namespace uCommerce.Migrations.Samples.ucomm
 		{
 			//System.Diagnostics.Debugger.Launch();
 
-			Definition justImportedCategory = Migrator.CategoryDefinition("JustImported", "This category keep products which are just imported by integration.");
+			Definition justImportedCategory = Migrator.CategoryDefinition("MigratedDefinition", "This category was created using uCommerce Migrations.");
 			Migrator.Save(justImportedCategory);
 		}
 
 		protected override void MigrateDown()
 		{
-			Migrator.DeleteCategoryDefinition("JustImported");
+			Migrator.DeleteCategoryDefinition("MigratedDefinition");
 		}
 	}
 }*/
