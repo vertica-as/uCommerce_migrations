@@ -1,5 +1,4 @@
-﻿/*using System;
-using FluentMigrator;
+﻿/*using FluentMigrator;
 using UCommerce.EntitiesV2;
 using uCommerce.Migrations.Runner_FluentMigrator;
 
