@@ -3,7 +3,7 @@
   <metadata>
     <id>uCommerce_migrations</id>
     <title>uCommerce Migrations</title>
-    <version>0.9.0.0</version>
+    <version>1.0.0.0</version>
     <authors>Vertica A/S</authors>
     <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
