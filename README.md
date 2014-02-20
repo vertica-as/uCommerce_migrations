@@ -63,9 +63,11 @@ _uCommerce migrations_ are run using _FluentMigrator_ runner `Migrate.exe` and p
 
 1. Several _uCommerce_-specific assemblies need to be accesible for `Migrate.exe` (usually copied to the same directory)
 	* Castle.Core.dll
-	* Iesi.Collections.dll
-	* Infralution.Licensing.dll
+	* Castle.Windsor.dll (in 5.x versions)
 	* NHibernate.dll
+	* FluentNHibernate.dll
+	* Iesi.Collections.dll
+	* Infralution.Licensing.dll	
 	* UCommerce.dll
 	* UCommerce.Infrastructure.dll
 2. The following file needs to be accesible for `Migrate.exe` (usually copied to the same directory)
@@ -82,6 +84,8 @@ The way the process can be automatized varies from project, but it always boils 
 
 1. copies the aforementioned artifacts needed to run the migrations
 2. Invoke `Migrate.exe`
+
+An example of such migration runner script can be found in `Run-Samples.ps1`
 
 ## Not using FluentMigrator
 
