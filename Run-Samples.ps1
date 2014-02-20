@@ -3,7 +3,7 @@ Param(
 	[Parameter(Mandatory=$False)]
 	[string]$deploy_folder = ".\Deploy\",
 	[Parameter(Mandatory=$False)]
-	[string]$package_folder = ".\packages\FluentMigrator.1.1.1.0\tools\",
+	[string]$package_folder = ".\packages\FluentMigrator.1.1.2.1\tools\",
     [Parameter(Mandatory=$False)]
 	[string]$ucommerce_folder = ".\lib\UCommerce-4.0.2.13277\",
     [Parameter(Mandatory=$False)]
@@ -38,21 +38,21 @@ function CopyUCommerce(){
 }
 
 function CopyMigrationsFramework(){
-	write-Host $package_folder
+	$migrator_artifacts = Join-Path $package_folder '*'
     @(
         ".\src\Samples\Infrastructure\Components.config",
-        "$package_folder*"
+        $migrator_artifacts
     ) | Copy-Item -Destination $deploy_folder -Force
 }
 
 function CopyMigrations(){
-    $migrations_dll = $migrations_folder + "uCommerce.Migrations.Samples.dll"
+    $migrations_dll = Join-Path $migrations_folder "uCommerce.Migrations.Samples.dll"
     Copy-Item $migrations_dll $deploy_folder
 }
 
 function Migrate() {
-    $migrations_dll = $deploy_folder + "uCommerce.Migrations.Samples.dll"
-    $migrate = $deploy_folder + "Migrate.exe"
+    $migrations_dll = Join-Path $deploy_folder "uCommerce.Migrations.Samples.dll"
+    $migrate = Join-Path $deploy_folder "Migrate.exe"
     $connectionString = "Integrated Security=SSPI;Initial Catalog=$migration_database;Data Source=$migration_server"
 
     & $migrate -db SqlServer2012 -a $migrations_dll -conn $connectionString -t $task

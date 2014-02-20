@@ -3,7 +3,7 @@
   <metadata>
     <id>uCommerce_migrations_runners_FluentMigrator</id>
     <title>uCommerce Migrations for FluentMigrator</title>
-    <version>0.9.0.0</version>
+    <version>1.0.0.0</version>
     <authors>Vertica A/S</authors>
     <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -16,8 +16,8 @@
     <iconUrl>https://raw2.github.com/vertica-as/uCommerce_migrations/master/logo.transparent.png</iconUrl>
     <tags>uCommerce migrations FluentMigrator</tags>
     <dependencies>
-      <dependency id="FluentMigrator" version="1.1.1.0"/>
-      <dependency id="uCommerce_migrations" version="0.9.0.0"/>
+      <dependency id="FluentMigrator" version="1.2.1.1"/>
+      <dependency id="uCommerce_migrations" version="1.0.0.0"/>
     </dependencies>
   </metadata>
   <files>
