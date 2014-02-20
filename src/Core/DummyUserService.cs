@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using UCommerce.EntitiesV2;
 using UCommerce.Security;
 
@@ -24,6 +25,11 @@ namespace uCommerce.Migrations.Core
 		public string GetCurrentUserName()
 		{
 			return GetCurrentUser().Name;
+		}
+
+		public CultureInfo GetCurrentUserCulture()
+		{
+			return CultureInfo.InvariantCulture;
 		}
 	}
 }
