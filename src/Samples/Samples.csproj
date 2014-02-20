@@ -40,10 +40,11 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="UCommerce">
+    <Reference Include="UCommerce, Version=5.2.3.14050, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\UCommerce-4.0.2.13277\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=4.0.2.13277, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=5.2.3.14050, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\UCommerce-4.0.2.13277\UCommerce.Infrastructure.dll</HintPath>
     </Reference>

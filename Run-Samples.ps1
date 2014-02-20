@@ -38,11 +38,10 @@ function CopyUCommerce(){
 }
 
 function CopyMigrationsFramework(){
+	write-Host $package_folder
     @(
-        ".\src\Core\bin\Debug\uCommerce.Migrations.Core.dll",
-        ".\src\Core\bin\Debug\Components.config",
-        ".\src\Runner_FluentMigrator\bin\Debug\uCommerce.Migrations.Runner_FluentMigrator.dll"
-        $package_folder + "*"
+        ".\src\Samples\Infrastructure\Components.config",
+        "$package_folder*"
     ) | Copy-Item -Destination $deploy_folder -Force
 }
 
