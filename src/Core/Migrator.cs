@@ -6,6 +6,55 @@ using UCommerce.EntitiesV2;
 
 namespace uCommerce.Migrations.Core
 {
+	#region Category DefinitionField
+
+	public class DefinitionFieldService
+	{
+		private readonly IRepository<DefinitionField> _repository;
+
+		public DefinitionFieldService(IRepository<DefinitionField> repository)
+		{
+			_repository = repository;
+		}
+
+		public DefinitionField AddDefinitionField(string name, Definition category, DataType type, bool multilingual = false)
+		{
+			DefinitionField field = _repository.SingleOrDefault(x => x.Name == name && x.Definition == category) ?? new DefinitionField();
+			field.Definition = category;
+			field.DataType = type;
+			field.Name = name;
+			field.DisplayOnSite = true;
+			field.Multilingual = multilingual;
+			field.RenderInEditor = true;
+			field.Deleted = false;
+
+			category.DefinitionFields.Add(field);
+
+			return field;
+		}
+
+		public void RemoveDefinitionField(Definition category, params string[] names)
+		{
+			foreach (var name in names)
+			{
+				try
+				{
+					DefinitionField toBeRemoved = _repository.SingleOrDefault(x => x.Name == name && x.Definition == category && !x.Deleted);
+
+					if (toBeRemoved != null)
+						category.DefinitionFields.Remove(toBeRemoved);
+				}
+				catch (Exception ex)
+				{
+					string message = string.Format("'{0}' category definition field doesn't exist.", name);
+					throw new InvalidOperationException(message, ex);
+				}
+			}
+		}
+	}
+
+	#endregion
+
 	public class Migrator
 	{
 		private readonly ISessionProvider _sessionProvider;
@@ -16,7 +65,7 @@ namespace uCommerce.Migrations.Core
 
 			_dataTypes = repository<DataType>(_sessionProvider);
 			_definitions = repository<Definition>(_sessionProvider);
-			_definitionFields = repository<DefinitionField>(_sessionProvider);
+			_definitionFields = new Lazy<DefinitionFieldService>(() => new DefinitionFieldService(new Repository<DefinitionField>(_sessionProvider)));
 			_productDefinitions = repository<ProductDefinition>(_sessionProvider);
 			_productDefinitionFields = repository<ProductDefinitionField>(_sessionProvider);
 			_currencies = repository<Currency>(_sessionProvider);
@@ -97,8 +146,9 @@ namespace uCommerce.Migrations.Core
 			return _catalogGroups.Value.Select(x => !x.Deleted);
 		}
 
-		private readonly Lazy<Repository<Definition>> _definitions;
+		#region Category definitions
 
+		private readonly Lazy<Repository<Definition>> _definitions;
 		public Definition CategoryDefinition(string name, string description)
 		{
 			Definition category = _definitions.Value.SingleOrDefault(x => x.Name == name);
@@ -128,28 +178,6 @@ namespace uCommerce.Migrations.Core
 			}
 		}
 
-		private readonly Lazy<Repository<DefinitionField>> _definitionFields;
-		public DefinitionField AddDefinitionField(string name, Definition category, DataType type, bool multilingual = false)
-		{
-			DefinitionField field = _definitionFields.Value
-				.SingleOrDefault(x => x.Name == name);
-			if (field == null)
-			{
-				field = new DefinitionField();
-			}
-			field.Definition = category;
-			field.DataType = type;
-			field.Name = name;
-			field.DisplayOnSite = true;
-			field.Multilingual = multilingual;
-			field.RenderInEditor = true;
-			field.Deleted = false;
-
-			category.DefinitionFields.Add(field);
-
-			return field;
-		}
-
 		public void Save(Definition category)
 		{
 			_definitions.Value.Save(category);
@@ -161,6 +189,21 @@ namespace uCommerce.Migrations.Core
 			_definitions.Value.Delete(toBeDeleted);
 		}
 
+		#endregion
+
+		
+		private readonly Lazy<DefinitionFieldService> _definitionFields;
+		public DefinitionField AddDefinitionField(string name, Definition category, DataType type, bool multilingual = false)
+		{
+			return _definitionFields.Value.AddDefinitionField(name, category, type, multilingual);
+		}
+
+		public void RemoveDefinitionFields(Definition category, params string[] names)
+		{
+			_definitionFields.Value.RemoveDefinitionField(category, names);
+		}
+
+		
 		private readonly Lazy<Repository<Category>> _categories;
 		public void AssignCategoryToCatalogs(string name, Definition definition, ProductCatalogGroup group)
 		{
@@ -285,25 +328,6 @@ namespace uCommerce.Migrations.Core
 				catch (Exception ex)
 				{
 					string message = string.Format("'{0}' product definition field doesn't exist.", name);
-					throw new InvalidOperationException(message, ex);
-				}
-			}
-		}
-
-		public void RemoveDefinitionFields(Definition category, params string[] names)
-		{
-			foreach (var name in names)
-			{
-				try
-				{
-					DefinitionField toBeRemoved = _definitionFields.Value.SingleOrDefault(x => x.Name == name && x.Definition == category && !x.Deleted);
-
-					if (toBeRemoved != null)
-						category.DefinitionFields.Remove(toBeRemoved);
-				}
-				catch (Exception ex)
-				{
-					string message = string.Format("'{0}' category definition field doesn't exist.", name);
 					throw new InvalidOperationException(message, ex);
 				}
 			}
