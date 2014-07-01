@@ -132,7 +132,7 @@ namespace uCommerce.Migrations.Core
 		public DefinitionField AddDefinitionField(string name, Definition category, DataType type, bool multilingual = false)
 		{
 			DefinitionField field = _definitionFields.Value
-				.SingleOrDefault(x => x.Name == name);
+				.SingleOrDefault(x => x.Name == name && x.Definition == category);
 			if (field == null)
 			{
 				field = new DefinitionField();
