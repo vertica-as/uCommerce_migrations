@@ -70,6 +70,7 @@ _uCommerce migrations_ are run using _FluentMigrator_ runner `Migrate.exe` and p
 	* Infralution.Licensing.dll	
 	* UCommerce.dll
 	* UCommerce.Infrastructure.dll
+	* Raven.Client.Lightweight (in 7.* versions)
 2. The following file needs to be accesible for `Migrate.exe` (usually copied to the same directory)
 	* `\Infrastructure\Components.config` 
 
